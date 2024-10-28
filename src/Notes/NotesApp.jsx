@@ -6,7 +6,7 @@ function Notes() {
     const [list, setList] = useState([]);
 
     const fetchNotes = async () => {
-        const response = await axios.get('https://react-js-task-backend.onrender.com/notes');
+        const response = await axios.get('http://localhost:5000/notes');
         setList(response.data);
     };
 
@@ -17,7 +17,7 @@ function Notes() {
     const HandleAdd = async () => {
         if (value.trim()) {
             const date = new Date().toISOString().slice(0, 19).replace("T", " ");
-            const response = await axios.post('https://react-js-task-backend.onrender.com/notes', { value, date });
+            const response = await axios.post('http://localhost:5000/notes', { value, date });
             setList([...list, response.data]);
             setValue("");
         }
@@ -30,7 +30,7 @@ function Notes() {
     };
 
     const HandleDelete = async (itemId) => {
-        await axios.delete(`https://react-js-task-backend.onrender.com/notes/${itemId}`);
+        await axios.delete(`http://localhost:5000/notes/${itemId}`);
         setList(list.filter(item => item.id !== itemId));
     };
 
